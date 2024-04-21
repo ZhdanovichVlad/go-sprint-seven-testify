@@ -10,7 +10,8 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// The following function makes the text where the number of cafes is greater than the number of cafes in the cafeList.
+// The following function makes the text where the number of cafes is greater than
+// the number of cafes in the cafeList.
 func TestMainHandlerWhenCountMoreThanTotal(t *testing.T) {
 	totalCount := 4
 	req := httptest.NewRequest("GET", "/cafe?count=10&city=moscow", nil)
@@ -25,7 +26,8 @@ func TestMainHandlerWhenCountMoreThanTotal(t *testing.T) {
 	assert.Equal(t, lenBody, totalCount, "Expected 4 cafe")
 }
 
-// The following function makes the test in which the customer has written the wrong city.
+// The following function makes the test
+// in which the customer has written the wrong city.
 func TestMainHandlerInWhichWrongCity(t *testing.T) {
 	req := httptest.NewRequest("GET", "/cafe?count=4&city=minsk", nil)
 	responseRecorder := httptest.NewRecorder()
