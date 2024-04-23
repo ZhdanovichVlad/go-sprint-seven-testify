@@ -10,6 +10,16 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+// Testing for a response from the MainHandler
+func TestMainHandler(t *testing.T) {
+	req := httptest.NewRequest("GET", "/cafe?count=10&city=moscow", nil)
+	responseRecorder := httptest.NewRecorder()
+	handler := http.HandlerFunc(mainHandle)
+	handler.ServeHTTP(responseRecorder, req)
+	require.Equal(t, responseRecorder.Code, http.StatusOK, "Expected status code 200")
+
+}
+
 // The following function makes the text where the number of cafes is greater than
 // the number of cafes in the cafeList.
 func TestMainHandlerWhenCountMoreThanTotal(t *testing.T) {
@@ -18,7 +28,6 @@ func TestMainHandlerWhenCountMoreThanTotal(t *testing.T) {
 	responseRecorder := httptest.NewRecorder()
 	handler := http.HandlerFunc(mainHandle)
 	handler.ServeHTTP(responseRecorder, req)
-	require.Equal(t, responseRecorder.Code, http.StatusOK, "Expected status code 200")
 
 	body := responseRecorder.Body.String()
 	assert.NotEmpty(t, responseRecorder.Body, "Body is empty")
